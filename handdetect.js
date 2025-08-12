@@ -1,4 +1,4 @@
-export function startDetectonHand(coordinatesCallback) {
+export function startDetectionHand(coordinatesCallback) {
     console.log("start callback detect");
     const videoElement = document.getElementById('videoInput');
     const canvasElement = document.getElementById('canvasOutput');
@@ -65,7 +65,7 @@ export function startDetectonHand(coordinatesCallback) {
                 // Виклик callback з новими значеннями
 				//loggedData(`Hand detected at X: ${xPercent}, Y: ${yPercent}`);
                 if (coordinatesCallback) {
-					loggedData(`Calling coordinatesCallback with X: ${xPercent}, Y: ${yPercent}`);
+                    // loggedData(`Calling coordinatesCallback with X: ${xPercent}, Y: ${yPercent}`);
                     coordinatesCallback(xPercent, yPercent);
                 }
             }
