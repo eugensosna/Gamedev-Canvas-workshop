@@ -8,6 +8,8 @@ var dx = 2;
 var dy = -2;
 var baseSpeed = 1;
 
+let playing = false;
+
 var paddleHeight = 10;
 var paddleWidth = 120;
 var paddleX = (canvas.width - paddleWidth) / 2;
@@ -36,6 +38,10 @@ document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", mouseMoveHandler, false);
 
 function keyDownHandler(e) {
+	if (!playing) {
+		playing = true;
+		requestAnimationFrame(draw);
+	}
 	if (e.code == "ArrowRight") {
 		rightPressed = true;
 	}
@@ -54,20 +60,29 @@ function keyUpHandler(e) {
 
 function coordinatesCallback(x, y) {
   var cameradetect = true;
+
   if (x) {
+	  if (!playing) {
+		  console.log("Start playing");
+		  playing = true;
+		  //   requestAnimationFrame(draw);
+	  }
     let coordinate = ((x * canvas.width) / 100).toFixed(0);
 	coordinate = coordinate ;
 	coordinate = parseInt(coordinate, 10); // or use Number()
 	//console.log(`Detected hand at X: ${coordinate} offsetLeft ${canvas.offsetLeft}`);
+	  // console.log(`Detected hand at X: ${coordinate} offsetLeft ${canvas.offsetLeft}`);
 	moveHandler(coordinate+canvas.offsetLeft );
   }
 }
+startDetectionHand(coordinatesCallback);
 startDetectionHand(coordinatesCallback);
 
 function moveHandler(clientX){
 	var relativeX = clientX - canvas.offsetLeft;
 	let condition = relativeX > 0 && relativeX < canvas.width ? true:false;
 	//console.log(`Relative X: ${relativeX} coordinate ${clientX} condition ${condition}`);
+	// console.log(`Relative X: ${relativeX} coordinate ${clientX} condition ${condition}`);
 	if (relativeX > 0 && relativeX < canvas.width) {
 		paddleX = relativeX - paddleWidth / 2;
 	}
@@ -91,6 +106,7 @@ function collisionDetection() {
 					score++;
 					if (score == brickRowCount * brickColumnCount) {
 						alert("YOU WIN, CONGRATS!");
+						playing = false;
 						document.location.reload();
 					}
 				}
@@ -151,6 +167,10 @@ function draw() {
 	drawLives();
 	collisionDetection();
 
+	if (!playing) {
+		return;
+	}
+
 	if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
 		dx = -dx;
 	}
@@ -165,6 +185,7 @@ function draw() {
 			lives--;
 			if (!lives) {
 				alert("GAME OVER");
+				playing = false;
 				document.location.reload();
 			}
 			else {

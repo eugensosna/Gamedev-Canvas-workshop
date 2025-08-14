@@ -65,7 +65,7 @@ export function startDetectionHand(coordinatesCallback) {
                 // Виклик callback з новими значеннями
 				//loggedData(`Hand detected at X: ${xPercent}, Y: ${yPercent}`);
                 if (coordinatesCallback) {
-					loggedData(`Calling coordinatesCallback with X: ${xPercent}, Y: ${yPercent}`);
+                    // loggedData(`Calling coordinatesCallback with X: ${xPercent}, Y: ${yPercent}`);
                     coordinatesCallback(xPercent, yPercent);
                 }
             }
