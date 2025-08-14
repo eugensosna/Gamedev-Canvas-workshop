@@ -1,4 +1,4 @@
-import { startHandDetection, startDetectonHand } from './handdetect.js';
+import { startDetectionHand } from './handdetect.js';
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var ballRadius = 10;
@@ -58,16 +58,16 @@ function coordinatesCallback(x, y) {
     let coordinate = ((x * canvas.width) / 100).toFixed(0);
 	coordinate = coordinate ;
 	coordinate = parseInt(coordinate, 10); // or use Number()
-	console.log(`Detected hand at X: ${coordinate} offsetLeft ${canvas.offsetLeft}`);
+	//console.log(`Detected hand at X: ${coordinate} offsetLeft ${canvas.offsetLeft}`);
 	moveHandler(coordinate+canvas.offsetLeft );
   }
 }
-startDetectonHand(coordinatesCallback);
+startDetectionHand(coordinatesCallback);
 
 function moveHandler(clientX){
 	var relativeX = clientX - canvas.offsetLeft;
 	let condition = relativeX > 0 && relativeX < canvas.width ? true:false;
-	console.log(`Relative X: ${relativeX} coordinate ${clientX} condition ${condition}`);
+	//console.log(`Relative X: ${relativeX} coordinate ${clientX} condition ${condition}`);
 	if (relativeX > 0 && relativeX < canvas.width) {
 		paddleX = relativeX - paddleWidth / 2;
 	}

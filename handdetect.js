@@ -1,7 +1,7 @@
-export function startDetectonHand(coordinatesCallback) {
+export function startDetectionHand(coordinatesCallback) {
     console.log("start callback detect");
     const videoElement = document.getElementById('videoInput');
-    const canvasElement = document.getElementById('canvasOutput');
+    const canvasElement = document.getElementById('videoOutput');
     const canvasCtx = canvasElement.getContext('2d');
 
     const hands = new Hands({
