@@ -76,7 +76,7 @@ function coordinatesCallback(x, y) {
   }
 }
 startDetectionHand(coordinatesCallback);
-startDetectionHand(coordinatesCallback);
+//startDetectionHand(coordinatesCallback);
 
 function moveHandler(clientX){
 	var relativeX = clientX - canvas.offsetLeft;
