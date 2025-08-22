@@ -38,15 +38,18 @@ document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", mouseMoveHandler, false);
 
 function keyDownHandler(e) {
-	if (!playing) {
-		playing = true;
-		requestAnimationFrame(draw);
-	}
+	
 	if (e.code == "ArrowRight") {
 		rightPressed = true;
 	}
 	else if (e.code == 'ArrowLeft') {
 		leftPressed = true;
+	}
+	if (e.code == "Space"){
+		if (!playing) {
+		playing = true;
+		requestAnimationFrame(draw);
+	}
 	}
 }
 function keyUpHandler(e) {
@@ -64,7 +67,7 @@ function coordinatesCallback(x, y) {
   if (x) {
 	  if (!playing) {
 		  console.log("Start playing");
-		  playing = true;
+		//   playing = true;
 		  //   requestAnimationFrame(draw);
 	  }
     let coordinate = ((x * canvas.width) / 100).toFixed(0);
@@ -103,6 +106,7 @@ function collisionDetection() {
 				if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
 					dy = -dy;
 					b.status = 0;
+					// playing = false;
 					score++;
 					if (score == brickRowCount * brickColumnCount) {
 						alert("YOU WIN, CONGRATS!");
@@ -182,7 +186,9 @@ function draw() {
 			dy = -dy;
 		}
 		else {
+			
 			lives--;
+			playing = false;
 			if (!lives) {
 				alert("GAME OVER");
 				playing = false;
